@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Suite Pro | Compress, Edit, Convert & Manage PDF Files Online</title>
+    <meta name="description" content="Complete PDF solution: Compress PDF size, split/merge pages, edit content, convert to Word/Excel/Images, add watermark, OCR text recognition. 100% secure cloud processing.">
+    <meta name="keywords" content="PDF compressor, PDF editor, split PDF, merge PDF, PDF converter, PDF to Word, PDF security, OCR PDF, PDF watermark, reduce PDF size, online PDF tools">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #4f46e5;
+            --accent: #10b981;
+            --background: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            min-height: 100vh;
+        }
+
+        .glass-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: rgba(241, 245, 249, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+        }
+
+        .pdf-drop-zone {
+            border: 2px dashed #e2e8f0;
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(241, 245, 249, 0.3);
+        }
+
+        .process-indicator {
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Ad Unit -->
+    <div class="ad-unit">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="YOUR_ADSENSE_ID" data-ad-slot="1234567890"></ins>
+    </div>
+
+    <div class="container">
+        <div class="glass-container">
+            <h1>🖥️ PDF Suite Pro</h1>
+            <p>Complete PDF Management Solution</p>
+
+            <div class="pdf-drop-zone" id="dropZone">
+                <input type="file" id="pdfInput" accept=".pdf" hidden>
+                <div class="upload-icon">📤</div>
+                <p>Drag & Drop PDF or Click to Upload</p>
+                <button class="modern-btn" onclick="document.getElementById('pdfInput').click()">
+                    Choose PDF File
+                </button>
+            </div>
+
+            <div class="tool-grid">
+                <!-- Compression Card -->
+                <div class="feature-card">
+                    <h3>🔧 Compress PDF</h3>
+                    <label>Compression Level</label>
+                    <select class="modern-select" id="compressionLevel">
+                        <option value="low">Low (Minimum 72dpi)</option>
+                        <option value="medium" selected>Medium (150dpi)</option>
+                        <option value="high">High (300dpi)</option>
+                    </select>
+                    <label class="toggle">
+                        <input type="checkbox" id="compressImages"> 
+                        <span>Optimize Images</span>
+                    </label>
+                </div>
+
+                <!-- Split/Merge Card -->
+                <div class="feature-card">
+                    <h3>✂️ Split & Merge</h3>
+                    <div class="split-options">
+                        <input type="text" placeholder="Pages to split (e.g., 1-5)" id="splitPages">
+                        <button class="icon-btn" onclick="addMergeFile()">➕ Add to Merge</button>
+                    </div>
+                </div>
+
+                <!-- Conversion Card -->
+                <div class="feature-card">
+                    <h3>🔄 Convert PDF</h3>
+                    <select class="modern-select" id="convertFormat">
+                        <option value="docx">Word (.docx)</option>
+                        <option value="xlsx">Excel (.xlsx)</option>
+                        <option value="pptx">PowerPoint (.pptx)</option>
+                        <option value="jpg">Image (.jpg)</option>
+                        <option value="txt">Text (.txt)</option>
+                    </select>
+                    <label class="toggle">
+                        <input type="checkbox" id="ocrToggle"> 
+                        <span>Enable OCR</span>
+                    </label>
+                </div>
+
+                <!-- Security Card -->
+                <div class="feature-card">
+                    <h3>🔒 PDF Security</h3>
+                    <input type="password" placeholder="Set Password" id="pdfPassword">
+                    <label class="toggle">
+                        <input type="checkbox" id="restrictEditing"> 
+                        <span>Restrict Editing</span>
+                    </label>
+                </div>
+
+                <!-- Advanced Tools Card -->
+                <div class="feature-card">
+                    <h3>⚙️ Advanced Tools</h3>
+                    <label class="toggle">
+                        <input type="checkbox" id="addWatermark"> 
+                        <span>Add Watermark</span>
+                    </label>
+                    <label class="toggle">
+                        <input type="checkbox" id="rotatePages"> 
+                        <span>Rotate Pages</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="file-info">
+                    <span id="fileName"></span>
+                    <span id="fileSize"></span>
+                    <span id="pageCount"></span>
+                </div>
+                <div class="process-indicator">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <button class="modern-btn primary" onclick="processPDF()">
+                    🚀 Process PDF Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script for Enhanced Functionality -->
+    <script>
+        // PDF Metadata Reader
+        document.getElementById('pdfInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('fileSize').textContent = (file.size/1024).toFixed(1) + 'KB';
+            
+            // Read page count (requires PDF.js implementation)
+            getPageCount(file).then(pages => {
+                document.getElementById('pageCount').textContent = pages + ' pages';
+            });
+        });
+
+        async function processPDF() {
+            // Enhanced processing logic
+            const options = {
+                compression: document.getElementById('compressionLevel').value,
+                format: document.getElementById('convertFormat').value,
+                password: document.getElementById('pdfPassword').value,
+                ocr: document.getElementById('ocrToggle').checked,
+                watermark: document.getElementById('addWatermark').checked
+            };
+
+            showProgress(true);
+            
+            try {
+                // Process PDF with selected options
+                const processedPDF = await PDFProcessor.process(options);
+                downloadFile(processedPDF);
+            } catch (error) {
+                showError(error.message);
+            } finally {
+                showProgress(false);
+            }
+        }
+
+        function showProgress(show) {
+            // Animated progress indicator
+            const progressBar = document.getElementById('progressBar');
+            if(show) {
+                progressBar.style.width = '100%';
+                progressBar.style.transition = 'width 30s linear';
+            } else {
+                progressBar.style.width = '0';
+            }
+        }
+    </script>
+
+    <!-- Middle Ad Unit -->
+    <div class="ad-unit">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="YOUR_ADSENSE_ID" data-ad-slot="0987654321"></ins>
+    </div>
+</body>
+</html>
