@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitalEternity | AI-Powered Digital Legacy Management Platform</title>
+    <meta name="description" content="Secure digital legacy management with AI guardianship. Preserve, protect, and transfer digital assets with smart inheritance planning and blockchain security.">
+    <meta name="keywords" content="digital legacy manager, AI inheritance planning, posthumous digital assets, blockchain will executor, social media legacy, cryptocurrency inheritance, digital memory preservation">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "DigitalEternity",
+        "description": "Advanced digital legacy management platform with AI guardianship",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web"
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #3498DB;
+            --accent: #E74C3C;
+            --background: #ECF0F1;
+        }
+
+        .legacy-dashboard {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .asset-uploader {
+            border: 2px dashed var(--primary);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .legacy-tier-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .ai-guardian-panel {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Ad -->
+    <div class="ad-unit">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="YOUR_ADSENSE_ID"
+            data-ad-slot="1234567890"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="legacy-dashboard">
+        <!-- Navigation Panel -->
+        <div class="legacy-sidebar">
+            <div class="asset-uploader" id="dropZone">
+                <input type="file" id="legacyUpload" hidden multiple>
+                <h3>📁 Add Digital Assets</h3>
+                <p>Drag & drop files or click to upload</p>
+                <div class="supported-assets">
+                    <span>📷 Media</span>
+                    <span>🔑 Crypto</span>
+                    <span>📱 Social</span>
+                </div>
+            </div>
+
+            <div class="legacy-tier-card">
+                <h4>Legacy Protection Tier</h4>
+                <select id="legacyTier">
+                    <option value="basic">Basic (5GB)</option>
+                    <option value="standard">Standard (25GB)</option>
+                    <option value="premium">Premium (100GB+)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Main Dashboard -->
+        <div class="ai-guardian-panel">
+            <h1>🛡️ Digital Legacy Guardian</h1>
+            
+            <div class="legacy-configurator">
+                <div class="config-section">
+                    <h3>🔒 Access Control</h3>
+                    <div class="beneficiary-grid">
+                        <div class="beneficiary-card">
+                            <input type="email" placeholder="Add beneficiary email">
+                            <select class="access-level">
+                                <option>Full Access</option>
+                                <option>Partial Access</option>
+                                <option>Time-Locked</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>⏳ Activation Triggers</h3>
+                    <div class="trigger-options">
+                        <label><input type="checkbox"> Inactivity Period</label>
+                        <label><input type="checkbox"> Medical Emergency</label>
+                        <label><input type="checkbox"> Manual Activation</label>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>🤖 AI Guardian Settings</h3>
+                    <div class="ai-sliders">
+                        <div class="slider-item">
+                            <label>Memory Preservation Level</label>
+                            <input type="range" min="1" max="10" value="5">
+                        </div>
+                        <div class="slider-item">
+                            <label>Data Sensitivity</label>
+                            <input type="range" min="1" max="5" value="3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="legacy-preview">
+                <h3>📋 Legacy Summary</h3>
+                <div class="preview-grid">
+                    <div class="preview-card">
+                        <h4>Digital Assets</h4>
+                        <div class="asset-list" id="assetPreview"></div>
+                    </div>
+                    <div class="preview-card">
+                        <h4>Activation Plan</h4>
+                        <div class="plan-details"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Ad -->
+    <div class="ad-unit">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="YOUR_ADSENSE_ID"
+            data-ad-slot="0987654321"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+    </div>
+
+    <script>
+        // Legacy Management System
+        class DigitalLegacy {
+            constructor() {
+                this.assets = [];
+                this.beneficiaries = [];
+                this.settings = {
+                    tier: 'basic',
+                    aiConfig: {
+                        memoryLevel: 5,
+                        sensitivity: 3
+                    }
+                };
+            }
+
+            handleUpload(files) {
+                Array.from(files).forEach(file => {
+                    this.assets.push({
+                        name: file.name,
+                        type: file.type,
+                        size: file.size
+                    });
+                });
+                this.updateAssetPreview();
+            }
+
+            updateAssetPreview() {
+                const preview = document.getElementById('assetPreview');
+                preview.innerHTML = this.assets
+                    .map(asset => `<div class="asset-item">${asset.name}</div>`)
+                    .join('');
+            }
+        }
+
+        // Initialize Legacy Manager
+        const legacyManager = new DigitalLegacy();
+
+        // Drag & Drop Handlers
+        const dropZone = document.getElementById('dropZone');
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.backgroundColor = '#f8f9fa';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            legacyManager.handleUpload(e.dataTransfer.files);
+            dropZone.style.backgroundColor = 'white';
+        });
+
+        // Initialize AdSense
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
