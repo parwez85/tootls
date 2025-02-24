@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalFX | Smart Currency Converter & Market Tracker</title>
+    <meta name="description" content="Real-time currency converter with 180+ currencies, live market trends, and financial analytics. Professional-grade foreign exchange tools for individuals and businesses.">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            --text: #2b2d42;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Main Converter Section */
+        .converter-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .converter-panel::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                rgba(67, 97, 238, 0.1) 0%,
+                rgba(76, 201, 240, 0.05) 100%);
+            z-index: -1;
+        }
+
+        /* Currency Selector */
+        .currency-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .currency-selector:hover {
+            transform: translateY(-2px);
+        }
+
+        .currency-flag {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Market Dashboard */
+        .market-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .market-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .market-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .converter-panel {
+                padding: 1.5rem;
+            }
+
+            .currency-selector {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main Converter -->
+        <div class="converter-panel">
+            <div class="converter-header">
+                <h1>Global Currency Converter</h1>
+                <p>Real-time exchange rates for 180+ currencies</p>
+            </div>
+
+            <div class="converter-body">
+                <div class="currency-selector">
+                    <img src="usd-flag.svg" alt="USD" class="currency-flag">
+                    <div class="currency-details">
+                        <select class="currency-select">
+                            <option value="USD">US Dollar (USD)</option>
+                            <!-- Add 180+ currency options -->
+                        </select>
+                        <input type="number" value="1.00" class="currency-input">
+                    </div>
+                </div>
+
+                <div class="conversion-arrow">⇅</div>
+
+                <div class="currency-selector">
+                    <img src="eur-flag.svg" alt="EUR" class="currency-flag">
+                    <div class="currency-details">
+                        <select class="currency-select">
+                            <option value="EUR">Euro (EUR)</option>
+                            <!-- Add 180+ currency options -->
+                        </select>
+                        <output class="currency-output">0.92</output>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-info">
+                <div class="rate-trend">
+                    <span class="trend-up">↑ 0.3%</span>
+                    <span>1 USD = 0.92 EUR</span>
+                </div>
+                <button class="convert-btn">Convert Now</button>
+            </div>
+        </div>
+
+        <!-- Market Dashboard -->
+        <div class="market-dashboard">
+            <div class="market-card">
+                <h3>Live Market Rates</h3>
+                <div class="currency-grid">
+                    <!-- Dynamic content from JS -->
+                </div>
+            </div>
+
+            <div class="market-card">
+                <h3>Trending Currencies</h3>
+                <div class="trend-list">
+                    <!-- Dynamic content from JS -->
+                </div>
+            </div>
+
+            <div class="market-card">
+                <h3>Historical Chart</h3>
+                <div class="chart-container">
+                    <canvas id="rateChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ad Unit -->
+        <div class="ad-unit">
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="YOUR_ADSENSE_ID"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+        </div>
+    </div>
+
+    <script>
+    // Modern JavaScript Implementation
+    class CurrencyConverter {
+        constructor() {
+            this.rates = {};
+            this.baseCurrency = 'USD';
+            this.init();
+        }
+
+        async init() {
+            await this.fetchRates();
+            this.renderCurrencies();
+            this.setupEventListeners();
+        }
+
+        async fetchRates() {
+            try {
+                const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+                this.rates = await response.json();
+                this.updateConversions();
+            } catch (error) {
+                console.error('Error fetching rates:', error);
+            }
+        }
+
+        renderCurrencies() {
+            const currencyGrid = document.querySelector('.currency-grid');
+            currencyGrid.innerHTML = Object.entries(this.rates)
+                .map(([currency, rate]) => `
+                    <div class="currency-item">
+                        <img src="${currency.toLowerCase()}-flag.svg" alt="${currency}">
+                        <span>${currency}</span>
+                        <span>${rate.toFixed(4)}</span>
+                    </div>
+                `).join('');
+        }
+
+        setupEventListeners() {
+            document.querySelectorAll('.currency-select').forEach(select => {
+                select.addEventListener('change', () => this.updateConversions());
+            });
+            
+            document.querySelector('.convert-btn').addEventListener('click', () => {
+                this.updateConversions();
+            });
+        }
+
+        updateConversions() {
+            const base = document.querySelector('.currency-select').value;
+            const target = document.querySelectorAll('.currency-select')[1].value;
+            const amount = document.querySelector('.currency-input').value;
+            
+            const converted = amount * (this.rates[target] / this.rates[base]);
+            document.querySelector('.currency-output').value = converted.toFixed(4);
+        }
+    }
+
+    // Initialize App
+    new CurrencyConverter();
+    </script>
+</body>
+</html>
