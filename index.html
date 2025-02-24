@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UltimateToolKit - 100+ Free Online Converters & Calculators</title>
+    <meta name="description" content="Free online tools for all your needs! Convert images, edit PDFs, calculate finances, and more. 100+ tools available instantly.">
+    <meta name="keywords" content="online tools, PDF converter, image converter, calculator tools, free tools">
+    
+    <!-- SEO Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "UltimateToolKit",
+        "url": "https://ultimatetoolkit.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://ultimatetoolkit.com/search?q={search_term}",
+            "query-input": "required name=search_term"
+        }
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #ec4899;
+            --dark: #1e1b4b;
+            --light: #f5f3ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(45deg, #f5f3ff, #e0e7ff);
+            color: var(--dark);
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            color: var(--dark);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tool-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .tool-category {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--primary);
+            z-index: 1000;
+            transition: width 0.3s ease-out;
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/" class="logo">UltimateToolKit</a>
+            <div class="nav-links">
+                <a href="#tools">Tools</a>
+                <a href="#categories">Categories</a>
+                <a href="#about">About</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Your All-in-One Digital Toolkit 🛠️</h1>
+        <p>Instant Access to 100+ Free Online Tools</p>
+        
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Search tools...">
+            <i class="fas fa-search"></i>
+        </div>
+    </section>
+
+    <main>
+        <section class="tools-grid" id="tools">
+            <!-- PDF Tools -->
+            <a href="/pdf-tools" class="tool-card">
+                <div class="tool-badge">New</div>
+                <i class="tool-icon fas fa-file-pdf"></i>
+                <div class="tool-category">Documents</div>
+                <h3>PDF Toolkit</h3>
+                <p>Compress, merge, split & convert PDF files</p>
+                <div class="tool-stats">
+                    <span>⭐ 4.9 (2.1k reviews)</span>
+                </div>
+            </a>
+
+            <!-- Image Converter -->
+            <a href="/image-converter" class="tool-card">
+                <div class="tool-badge">Popular</div>
+                <i class="tool-icon fas fa-image"></i>
+                <div class="tool-category">Media</div>
+                <h3>Image Converter</h3>
+                <p>Convert between 10+ image formats</p>
+                <div class="tool-stats">
+                    <span>⭐ 4.8 (1.8k reviews)</span>
+                </div>
+            </a>
+
+            <!-- Financial Calculator -->
+            <a href="/financial-calculator" class="tool-card">
+                <i class="tool-icon fas fa-calculator"></i>
+                <div class="tool-category">Finance</div>
+                <h3>Finance Calculator</h3>
+                <p>Loan, mortgage & investment tools</p>
+                <div class="tool-stats">
+                    <span>⭐ 4.7 (1.2k reviews)</span>
+                </div>
+            </a>
+
+            <!-- Video Converter -->
+            <a href="/video-converter" class="tool-card">
+                <i class="tool-icon fas fa-video"></i>
+                <div class="tool-category">Media</div>
+                <h3>Video Converter</h3>
+                <p>Convert video formats in seconds</p>
+                <div class="tool-stats">
+                    <span>⭐ 4.6 (980 reviews)</span>
+                </div>
+            </a>
+        </section>
+
+        <!-- Ad Unit -->
+        <div class="ad-unit">
+            <!-- Google AdSense Code Here -->
+        </div>
+
+        <!-- Categories Section -->
+        <section class="categories" id="categories">
+            <h2>Popular Categories</h2>
+            <div class="categories-grid">
+                <a href="/pdf-tools" class="category-card">
+                    <i class="fas fa-file-pdf"></i>
+                    <h4>PDF Tools</h4>
+                </a>
+                <a href="/image-tools" class="category-card">
+                    <i class="fas fa-image"></i>
+                    <h4>Image Tools</h4>
+                </a>
+                <a href="/calculators" class="category-card">
+                    <i class="fas fa-calculator"></i>
+                    <h4>Calculators</h4>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h5>SEO Content</h5>
+                <p>UltimateToolKit offers free online tools for document conversion, image editing, and financial calculations. Trusted by millions worldwide for quick and secure file processing.</p>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2023 UltimateToolKit. All rights reserved.
+        </div>
+    </footer>
+
+    <div class="fab" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + "%";
+            
+            // Show/hide FAB
+            document.querySelector('.fab').style.opacity = winScroll > 500 ? '1' : '0';
+        });
+
+        // Scroll to Top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Tool Card Interactions
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.createElement('button');
+        menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        menuBtn.className = 'mobile-menu-btn';
+        document.querySelector('.nav-container').appendChild(menuBtn);
+
+        menuBtn.addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
