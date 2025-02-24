@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Image Converter | Convert & Optimize Images Online</title>
+    <meta name="description" content="Professional online image converter with advanced options. Convert between JPG, PNG, WebP, AVIF, BMP formats. Resize, compress, and optimize images for web and print.">
+    <meta name="keywords" content="image converter, photo editor, HEIC converter, AVIF converter, image resizer, DPI changer, image optimizer, WebP converter">
+    
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #4f46e5;
+            --accent: #ec4899;
+            --background: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            min-height: 100vh;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .converter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .drop-zone {
+            border: 2px dashed #e2e8f0;
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: rgba(241, 245, 249, 0.5);
+        }
+
+        .preview-comparison {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .conversion-loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.2.2/dist/heic2any.min.js"></script>
+</head>
+<body>
+    <!-- Ad Unit Top -->
+    <div class="ad-unit">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="YOUR_ADSENSE_ID" data-ad-slot="1234567890"></ins>
+    </div>
+
+    <div class="container">
+        <div class="glass-panel">
+            <h1>Ultimate Image Converter</h1>
+            
+            <div class="drop-zone" id="dropZone">
+                <input type="file" id="fileInput" accept="image/*,image/heic,image/heif" hidden>
+                <div class="upload-icon">📤</div>
+                <p>Drag & drop images or click to upload</p>
+                <button class="modern-btn" onclick="document.getElementById('fileInput').click()">
+                    Choose Files
+                </button>
+            </div>
+
+            <div class="converter-grid">
+                <!-- Output Format -->
+                <div class="setting-card">
+                    <label>Output Format</label>
+                    <select id="formatSelect" class="modern-select">
+                        <option value="jpg">JPEG</option>
+                        <option value="png">PNG</option>
+                        <option value="webp">WebP</option>
+                        <option value="avif">AVIF</option>
+                        <option value="bmp">BMP</option>
+                        <option value="pdf">PDF</option>
+                    </select>
+                </div>
+
+                <!-- Quality -->
+                <div class="setting-card">
+                    <label>Quality: <span id="qualityValue">85</span>%</label>
+                    <input type="range" id="qualityRange" class="modern-range" min="1" max="100" value="85">
+                </div>
+
+                <!-- Resize -->
+                <div class="setting-card">
+                    <label>Resize</label>
+                    <div class="resize-options">
+                        <button class="resize-btn active" data-type="percentage">%</button>
+                        <button class="resize-btn" data-type="pixels">px</button>
+                        <input type="number" id="resizeValue" value="100" min="1">
+                    </div>
+                </div>
+
+                <!-- Advanced Options -->
+                <div class="setting-card">
+                    <label>Advanced</label>
+                    <div class="advanced-options">
+                        <label><input type="checkbox" id="keepMetadata"> Keep Metadata</label>
+                        <label><input type="checkbox" id="preserveTransparency"> Preserve Transparency</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-comparison">
+                <div class="before-after">
+                    <div class="before">
+                        <img id="originalPreview" alt="Original Image">
+                    </div>
+                    <div class="after">
+                        <img id="convertedPreview" alt="Converted Image">
+                    </div>
+                </div>
+                <div class="comparison-slider"></div>
+            </div>
+
+            <button class="modern-btn primary" onclick="startConversion()">
+                🚀 Convert Now
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="conversion-loader" id="loader">
+        <div class="loader-spinner"></div>
+        <p>Optimizing your image...</p>
+    </div>
+
+    <script>
+        // Enhanced Conversion Logic
+        async function startConversion() {
+            const file = document.getElementById('fileInput').files[0];
+            if (!file) return showError('Please select an image file');
+            
+            showLoader(true);
+            
+            try {
+                let imageBlob = file;
+                
+                // Handle HEIC/HEIF conversion
+                if (file.type.includes('heic') || file.type.includes('heif')) {
+                    imageBlob = await heic2any({
+                        blob: file,
+                        toType: 'image/jpeg',
+                        quality: qualityRange.value / 100
+                    });
+                }
+
+                const convertedBlob = await convertImage(imageBlob);
+                displayResult(convertedBlob);
+            } catch (error) {
+                showError('Conversion failed: ' + error.message);
+            } finally {
+                showLoader(false);
+            }
+        }
+
+        async function convertImage(file) {
+            // Advanced conversion logic with resize and format options
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.src = URL.createObjectURL(file);
+                
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    
+                    // Apply resize calculations
+                    const newDimensions = calculateNewDimensions(img.width, img.height);
+                    canvas.width = newDimensions.width;
+                    canvas.height = newDimensions.height;
+                    
+                    ctx.drawImage(img, 0, 0, ...Object.values(newDimensions));
+                    
+                    // Quality and format settings
+                    const format = formatSelect.value;
+                    const quality = qualityRange.value / 100;
+                    const options = {
+                        quality: format === 'png' ? Math.min(quality * 1.2, 1) : quality
+                    };
+
+                    canvas.toBlob(blob => resolve(blob), `image/${format}`, options);
+                };
+            });
+        }
+
+        function calculateNewDimensions(originalWidth, originalHeight) {
+            // Resize logic based on user selection
+            const resizeType = document.querySelector('.resize-btn.active').dataset.type;
+            const resizeValue = parseFloat(document.getElementById('resizeValue').value);
+            
+            if (resizeType === 'percentage') {
+                return {
+                    width: originalWidth * (resizeValue / 100),
+                    height: originalHeight * (resizeValue / 100)
+                };
+            }
+            
+            if (resizeType === 'pixels') {
+                const aspectRatio = originalWidth / originalHeight;
+                return resizeValue > aspectRatio ? 
+                    { width: resizeValue, height: resizeValue / aspectRatio } :
+                    { height: resizeValue, width: resizeValue * aspectRatio };
+            }
+        }
+    </script>
+</body>
+</html>
