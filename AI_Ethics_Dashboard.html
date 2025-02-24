@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Ethics Guardian | Smart Audit Dashboard with Data Integration</title>
+    <meta name="description" content="Advanced AI system auditing platform with model analysis, bias detection, and compliance monitoring. Supports multi-format data imports and real-time collaboration.">
+    <meta name="keywords" content="AI ethics dashboard, algorithmic audit tool, machine learning compliance, model governance platform, bias detection system, AI validation suite">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --secondary: #50E3C2;
+            --accent: #FF6B6B;
+            --background: #F8F9FA;
+        }
+
+        .dashboard-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+
+        .data-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .audit-visualization {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            min-height: 600px;
+        }
+
+        .model-uploader {
+            border: 2px dashed var(--primary);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Ad -->
+    <div class="ad-unit leaderboard">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="YOUR_ADSENSE_ID" data-ad-slot="1234567890"></ins>
+    </div>
+
+    <div class="dashboard-container">
+        <!-- Left Panel - Data Management -->
+        <div class="data-panel">
+            <div class="model-uploader" id="dropZone">
+                <input type="file" id="modelUpload" hidden accept=".json,.csv,.pkl">
+                <h3>📁 Upload AI Model</h3>
+                <p>Drag & drop or click to upload</p>
+                <div class="supported-formats">
+                    <span>JSON</span>
+                    <span>CSV</span>
+                    <span>Pickle</span>
+                </div>
+            </div>
+
+            <div class="data-sources">
+                <h3>🔗 Connect Data Sources</h3>
+                <input type="url" id="apiEndpoint" placeholder="Enter API endpoint">
+                <button class="connect-btn">Verify Connection</button>
+            </div>
+
+            <div class="audit-presets">
+                <h3>⚙️ Audit Profiles</h3>
+                <div class="preset-card active" data-preset="gdpr">
+                    GDPR Compliance
+                </div>
+                <div class="preset-card" data-preset="euai">
+                    EU AI Act
+                </div>
+                <div class="preset-card" data-preset="custom">
+                    Custom Audit
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Audit Dashboard -->
+        <div class="audit-visualization">
+            <div class="dashboard-header">
+                <h1>AI Ethics Dashboard</h1>
+                <div class="real-time-indicator">
+                    <div class="status-dot"></div>
+                    Live Monitoring
+                </div>
+            </div>
+
+            <div class="metric-grid">
+                <div class="metric-card bias">
+                    <h4>Bias Detection</h4>
+                    <div class="bias-matrix"></div>
+                    <div class="confidence-score">87% Accuracy</div>
+                </div>
+                
+                <div class="metric-card fairness">
+                    <h4>Fairness Metrics</h4>
+                    <div class="radar-chart"></div>
+                    <div class="comparison-toggle">
+                        <button class="active">Demographic</button>
+                        <button>Geographic</button>
+                    </div>
+                </div>
+
+                <div class="metric-card compliance">
+                    <h4>Regulatory Compliance</h4>
+                    <div class="compliance-checklist">
+                        <div class="check-item passed">GDPR</div>
+                        <div class="check-item warning">EU AI Act</div>
+                        <div class="check-item failed">CCPA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-panel">
+                <button class="primary-btn">Generate Report</button>
+                <button class="secondary-btn">Export Findings</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Advanced Audit System
+        class AuditManager {
+            constructor() {
+                this.auditProfiles = {
+                    gdpr: ['data_privacy', 'transparency'],
+                    euai: ['risk_assessment', 'human_oversight'],
+                    custom: []
+                };
+            }
+
+            handleFileUpload(file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.analyzeModel(e.target.result);
+                };
+                reader.readAsText(file);
+            }
+
+            analyzeModel(data) {
+                // Model analysis logic
+                console.log('Analyzing model:', data);
+            }
+        }
+
+        // Initialize Drag & Drop
+        const dropZone = document.getElementById('dropZone');
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.backgroundColor = '#F0F4FF';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const files = e.dataTransfer.files;
+            if(files.length > 0) {
+                new AuditManager().handleFileUpload(files[0]);
+            }
+        });
+
+        // Initialize AdSense
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
